@@ -32,7 +32,7 @@ export default function ContaPage() {
           {/* CABEÇALHO DA TELA DE CONFIGURAÇÃO */}
           <div className="mb-[32px]">
             <Link href="/configuracoes" className="inline-flex items-center gap-[8px] text-[#6B7280] hover:text-[#1A1A2E] text-[13px] font-[600] mb-[16px] transition-colors">
-              <ArrowLeft className="w-[16px] h-[16px]" strokeWidth={{2}} />
+              <ArrowLeft className="w-[16px] h-[16px]" strokeWidth={2} />
               Voltar para Configurações
             </Link>
             <h1 className="text-[24px] font-[600] text-[#1A1A2E] tracking-tight">Minha Conta</h1>
