@@ -1,0 +1,47 @@
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { LocaleProvider } from "@/context/LocaleContext";
+import { MockProvider } from "@/mocks/MockProvider";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+
+export const metadata: Metadata = {
+  title: "Basiléia Finance OS",
+  description: "Sistema Financeiro",
+};
+
+import { Toaster } from "sonner";
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="pt-BR">
+      <body className={`${inter.variable} font-sans bg-[#F9FAFB] text-[#111827] antialiased`}>
+        <MockProvider>
+          <LocaleProvider>
+            {children}
+          </LocaleProvider>
+
+        </MockProvider>
+        <Toaster 
+          position="top-center" 
+          toastOptions={{
+            style: {
+              background: '#F8F7FC', // gray-50 roxo muito suave
+              color: '#3B0764',      // purple-deep
+              borderColor: '#E9D5FF', // border roxa clara
+              boxShadow: '0 4px 12px rgba(124, 58, 237, 0.15)',
+              borderRadius: '12px',
+              fontWeight: 500,
+              fontSize: '14px',
+            },
+          }} 
+        />
+      </body>
+    </html>
+  );
+}
