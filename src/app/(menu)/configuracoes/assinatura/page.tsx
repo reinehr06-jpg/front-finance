@@ -27,7 +27,7 @@ export default function AssinaturaPage() {
       <div className="flex-1 ml-[240px] flex flex-col h-screen overflow-hidden">
         <Topbar />
         
-        <main className="p-[40px] flex-1 flex flex-col w-full max-w-[900px] mx-auto overflow-y-auto custom-scrollbar">
+        <main className="p-4 flex-1 flex flex-col w-full max-w-[1200px] mx-auto gap-4 overflow-y-auto custom-scrollbar">
           
           <div className="mb-[32px]">
             <Link href="/configuracoes" className="inline-flex items-center gap-[8px] text-[#6B7280] hover:text-[#1A1A2E] text-[13px] font-[600] mb-[16px] transition-colors">
@@ -41,7 +41,7 @@ export default function AssinaturaPage() {
           <div className="flex flex-col gap-[24px]">
              
              {/* PLANO ATUAL */}
-             <div className="bg-white border border-[#E5E7EB] shadow-sm rounded-[16px] p-[32px] relative overflow-hidden">
+             <div className="bg-white border border-[#E5E7EB] shadow-sm rounded-[12px] p-6 relative overflow-hidden">
                <div className="absolute top-0 left-0 w-full h-[6px] bg-[#6D28D9]"></div>
                <div className="flex items-start justify-between">
                  <div>
@@ -85,7 +85,7 @@ export default function AssinaturaPage() {
              </div>
 
              {/* FORMA DE PAGAMENTO */}
-             <div className="bg-white border border-[#E5E7EB] shadow-sm rounded-[16px] p-[32px]">
+             <div className="bg-white border border-[#E5E7EB] shadow-sm rounded-[12px] p-6">
                <h3 className="text-[16px] font-[600] text-[#1A1A2E] mb-[20px]">Forma de Pagamento</h3>
                <div className="flex items-center justify-between p-[20px] border border-[#E5E7EB] rounded-[12px]">
                  <div className="flex items-center gap-[16px]">
@@ -104,7 +104,7 @@ export default function AssinaturaPage() {
              </div>
 
              {/* HISTÓRICO DE FATURAS */}
-             <div className="bg-white border border-[#E5E7EB] shadow-sm rounded-[16px] p-[32px]">
+             <div className="bg-white border border-[#E5E7EB] shadow-sm rounded-[12px] p-6">
                <h3 className="text-[16px] font-[600] text-[#1A1A2E] mb-[20px]">Histórico de Faturas</h3>
                <table className="w-full">
                  <thead>
