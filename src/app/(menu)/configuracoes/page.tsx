@@ -4,7 +4,7 @@
  * ═══════════════════════════════════════════════════════════════════════════════
  *
  * 📍 ROTA: /configuracoes
- * 📁 ARQUIVO: src/app/configuracoes/page.tsx
+ * 📁 ARQUIVO: src/app/(menu)/configuracoes/page.tsx
  *
  * 🎯 OBJETIVO DESTA TELA:
  *    Painel central de configurações gerais do sistema (atalhos para sub-telas).
@@ -14,13 +14,20 @@
 
 "use client";
 
-// ─── IMPORTAÇÕES ─────────────────────────────────────────────────────────────
 import React, { useState } from "react";
 import Link from "next/link";
 import Sidebar from "@/components/Sidebar";
 import Topbar from "@/components/Topbar";
 import { 
-  Building2, Users, Layers, Wallet, Palette, ShieldCheck, RefreshCw, CreditCard, Search, Bell, HardDrive
+  Building2, 
+  User, 
+  Network, 
+  CreditCard, 
+  ArrowDownUp, 
+  FileText, 
+  CircleDollarSign,
+  Search,
+  ChevronRight
 } from "lucide-react";
 
 export default function ConfiguracoesPage() {
@@ -28,74 +35,53 @@ export default function ConfiguracoesPage() {
 
   const configuracoes = [
     {
+      id: "conta",
+      titulo: "Minha Conta",
+      descricao: "Nome, e-mail, senha, telefone e dados cadastrais do usuário.",
+      icone: <User className="w-[22px] h-[22px] text-[#6D28D9]" strokeWidth={1.5} />,
+      link: "/configuracoes/conta"
+    },
+    {
+      id: "igreja",
+      titulo: "Dados da Igreja",
+      descricao: "Razão social, nome da igreja, CNPJ, endereço, contatos e responsável.",
+      icone: <Building2 className="w-[22px] h-[22px] text-[#6D28D9]" strokeWidth={1.5} />,
+      link: "/configuracoes/igreja"
+    },
+    {
       id: "filiais",
-      titulo: "Instituição / Filiais",
-      descricao: "Gerencie a Igreja Sede, congregações, filiais e dados de CNPJ.",
-      icone: <Building2 className="w-[28px] h-[28px] text-[#6D28D9]" strokeWidth={1.5} />,
+      titulo: "Gerenciamento de Filiais",
+      descricao: "Cadastre, edite e organize sede, congregações e filiais vinculadas.",
+      icone: <Network className="w-[22px] h-[22px] text-[#6D28D9]" strokeWidth={1.5} />,
       link: "/configuracoes/filiais"
-    },
-    {
-      id: "usuarios",
-      titulo: "Usuários e Acessos",
-      descricao: "Controle de administradores, tesoureiros, operadores e permissões de acesso.",
-      icone: <Users className="w-[28px] h-[28px] text-[#6D28D9]" strokeWidth={1.5} />,
-      link: "/configuracoes/usuarios"
-    },
-    {
-      id: "plano-contas",
-      titulo: "Plano de Contas",
-      descricao: "Estrutura contábil, categorias financeiras padrão para receitas e despesas.",
-      icone: <Layers className="w-[28px] h-[28px] text-[#6D28D9]" strokeWidth={1.5} />,
-      link: "/contabilidade/categorias" // Redireciona para categorias
-    },
-    {
-      id: "contas-bancarias",
-      titulo: "Contas e Caixas",
-      descricao: "Configuração dos bancos, carteiras digitais, saldos iniciais e caixas físicos.",
-      icone: <Wallet className="w-[28px] h-[28px] text-[#6D28D9]" strokeWidth={1.5} />,
-      link: "/contas" // Redireciona para contas
-    },
-    {
-      id: "personalizacao",
-      titulo: "Personalização",
-      descricao: "Logotipo da Igreja, informações nos recibos, cores e preferências de sistema.",
-      icone: <Palette className="w-[28px] h-[28px] text-[#6D28D9]" strokeWidth={1.5} />,
-      link: "/configuracoes/personalizacao"
-    },
-    {
-      id: "seguranca",
-      titulo: "Segurança e Auditoria",
-      descricao: "Logs de acesso, autenticação em duas etapas (2FA) e rotinas de backup.",
-      icone: <ShieldCheck className="w-[28px] h-[28px] text-[#6D28D9]" strokeWidth={1.5} />,
-      link: "/configuracoes/seguranca"
-    },
-    {
-      id: "integracoes",
-      titulo: "Integrações e IA",
-      descricao: "Regras de conciliação por IA, chaves de API, webhooks e automações.",
-      icone: <RefreshCw className="w-[28px] h-[28px] text-[#6D28D9]" strokeWidth={1.5} />,
-      link: "/configuracoes/integracoes"
-    },
-    {
-      id: "armazenamento",
-      titulo: "Armazenamento e Arquivos",
-      descricao: "Gerenciamento de espaço, documentos anexados e notas fiscais em nuvem.",
-      icone: <HardDrive className="w-[28px] h-[28px] text-[#6D28D9]" strokeWidth={1.5} />,
-      link: "/configuracoes/armazenamento"
-    },
-    {
-      id: "notificacoes",
-      titulo: "Alertas e Notificações",
-      descricao: "Configuração de e-mails, alertas de vencimento e avisos do sistema.",
-      icone: <Bell className="w-[28px] h-[28px] text-[#6D28D9]" strokeWidth={1.5} />,
-      link: "/configuracoes/notificacoes"
     },
     {
       id: "assinatura",
       titulo: "Assinatura e Planos",
-      descricao: "Gerencie seu plano atual do Basiléia, faturas, limites e formas de pagamento.",
-      icone: <CreditCard className="w-[28px] h-[28px] text-[#6D28D9]" strokeWidth={1.5} />,
+      descricao: "Acompanhe plano atual, limites, cobrança e dados da assinatura.",
+      icone: <CreditCard className="w-[22px] h-[22px] text-[#6D28D9]" strokeWidth={1.5} />,
       link: "/configuracoes/assinatura"
+    },
+    {
+      id: "importacao",
+      titulo: "Importação e Exportação",
+      descricao: "Defina padrões de importação CSV/XML/OFX e exportações contábeis.",
+      icone: <ArrowDownUp className="w-[22px] h-[22px] text-[#6D28D9]" strokeWidth={1.5} />,
+      link: "/configuracoes/importacao"
+    },
+    {
+      id: "documentos",
+      titulo: "Documentos e Recibos",
+      descricao: "Modelos de recibo, dados exibidos e configurações de emissão.",
+      icone: <FileText className="w-[22px] h-[22px] text-[#6D28D9]" strokeWidth={1.5} />,
+      link: "/configuracoes/documentos"
+    },
+    {
+      id: "preferencias",
+      titulo: "Preferências Financeiras",
+      descricao: "Moeda, competência ou caixa, padrões de lançamento e regras gerais.",
+      icone: <CircleDollarSign className="w-[22px] h-[22px] text-[#6D28D9]" strokeWidth={1.5} />,
+      link: "/configuracoes/preferencias"
     }
   ];
 
@@ -105,15 +91,18 @@ export default function ConfiguracoesPage() {
   );
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden font-inter bg-[#F5F5F7]">
+    <div className="flex h-screen w-screen overflow-hidden font-inter bg-[#F9FAFB]">
       <Sidebar />
       <div className="flex-1 ml-[240px] flex flex-col h-screen overflow-hidden">
         <Topbar />
         
-        <main className="p-[40px] flex-1 flex flex-col w-full max-w-[1200px] mx-auto overflow-y-auto custom-scrollbar">
+        <main className="p-[40px] flex-1 flex flex-col w-full max-w-[1100px] mx-auto overflow-y-auto custom-scrollbar">
           
-          <div className="flex flex-col items-center justify-center mb-[48px] mt-[24px]">
-            <h1 className="text-[32px] font-[300] text-[#1A1A2E] tracking-tight mb-[24px]">Configurações do Sistema</h1>
+          {/* HEADER E BUSCA */}
+          <div className="flex flex-col items-center justify-center mb-[56px] mt-[32px]">
+            <h1 className="text-[28px] font-[400] text-[#1A1A2E] tracking-tight mb-[24px]">
+              Configurações do Sistema
+            </h1>
             
             <div className="relative w-full max-w-[500px]">
               <input 
@@ -121,37 +110,47 @@ export default function ConfiguracoesPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Encontrar uma configuração..." 
-                className="w-full h-[48px] bg-white border border-[#E5E7EB] rounded-[24px] pl-[48px] pr-[24px] text-[15px] text-[#111827] placeholder-[#9CA3AF] shadow-sm outline-none hover:border-[#D1D5DB] focus:border-[#6D28D9] focus:ring-2 focus:ring-[#6D28D9]/20 transition-all" 
+                className="w-full h-[48px] bg-white border border-[#E5E7EB] rounded-[24px] pl-[48px] pr-[24px] text-[15px] text-[#111827] placeholder-[#9CA3AF] shadow-[0_2px_10px_rgba(0,0,0,0.02)] outline-none focus:border-[#6D28D9] focus:ring-2 focus:ring-[#6D28D9]/10 transition-all" 
               />
               <Search className="w-[18px] h-[18px] text-[#9CA3AF] absolute left-[20px] top-1/2 -translate-y-1/2" strokeWidth={2} />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[16px]">
-            {filteredConfig.map((config) => (
+          {/* GRID DE CARDS */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[20px]">
+            {filteredConfig.map((config, index) => (
               <Link 
                 key={config.id} 
                 href={config.link}
-                className="group flex items-start gap-[16px] bg-white border border-[#E5E7EB] rounded-[12px] p-[20px] hover:border-[#6D28D9] hover:shadow-[0_4px_20px_rgba(109,40,217,0.08)] transition-all cursor-pointer"
+                className={`group flex items-center gap-[16px] bg-white border border-[#F1F1F4] shadow-[0_2px_8px_rgba(0,0,0,0.03)] rounded-[16px] p-[20px] hover:border-[#6D28D9]/30 hover:shadow-[0_4px_16px_rgba(109,40,217,0.06)] transition-all cursor-pointer ${
+                  filteredConfig.length === 7 && index === 6 ? 'lg:col-start-2' : ''
+                }`}
               >
-                <div className="flex items-center justify-center w-[52px] h-[52px] bg-[#F9FAFB] rounded-[10px] group-hover:bg-[#F3E8FF] transition-colors shrink-0">
+                {/* ÍCONE COM BORDA */}
+                <div className="flex items-center justify-center w-[52px] h-[52px] bg-white border border-[#E5E7EB] rounded-[12px] group-hover:border-[#6D28D9]/20 group-hover:bg-[#F3E8FF]/30 transition-colors shrink-0">
                   {config.icone}
                 </div>
-                <div className="flex flex-col gap-[4px] pt-[2px]">
-                  <h3 className="text-[15px] font-[600] text-[#1A1A2E] group-hover:text-[#6D28D9] transition-colors">
+                
+                {/* TEXTOS */}
+                <div className="flex-1 flex flex-col gap-[4px] pr-[8px]">
+                  <h3 className="text-[14px] font-[600] text-[#1A1A2E] group-hover:text-[#6D28D9] transition-colors">
                     {config.titulo}
                   </h3>
-                  <p className="text-[13px] text-[#6B7280] leading-[1.4] line-clamp-2">
+                  <p className="text-[12px] text-[#6B7280] leading-[1.4] line-clamp-2">
                     {config.descricao}
                   </p>
                 </div>
+
+                {/* CHEVRON INDICADOR */}
+                <ChevronRight className="w-[18px] h-[18px] text-[#D1D5DB] group-hover:text-[#6D28D9] transition-colors shrink-0" strokeWidth={2} />
               </Link>
             ))}
           </div>
 
+          {/* EMPTY STATE */}
           {filteredConfig.length === 0 && (
             <div className="flex flex-col items-center justify-center mt-[60px] text-[#9CA3AF]">
-              <Search className="w-[48px] h-[48px] mb-[16px] text-[#D1D5DB]" strokeWidth={1} />
+              <Search className="w-[48px] h-[48px] mb-[16px] text-[#E5E7EB]" strokeWidth={1} />
               <p className="text-[16px] font-[500]">Nenhuma configuração encontrada para "{searchQuery}"</p>
               <button 
                 onClick={() => setSearchQuery("")}
