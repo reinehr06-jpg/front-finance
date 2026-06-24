@@ -115,7 +115,7 @@ export default function Sidebar() {
         <div className="flex flex-col w-full">
         {/* TOPO */}
         <div className="flex items-center justify-between px-3 pt-6 pb-4 relative h-20">
-          <Link href="/menu/dashboard" className="flex flex-col overflow-hidden hover:opacity-80 transition-opacity">{/* MAPA DO TESOURO: Logo / Branding — link para Dashboard */}
+          <Link href="/dashboard" className="flex flex-col overflow-hidden hover:opacity-80 transition-opacity">{/* MAPA DO TESOURO: Logo / Branding — link para Dashboard */}
             <img 
               src="https://dash.basileia.global/images/logo-basileia.png?0b669f9a5d54a07b37941d0c8db9ac64" 
               alt="Basileia" 
