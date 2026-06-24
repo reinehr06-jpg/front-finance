@@ -59,10 +59,7 @@ import {
   CalendarDays,    // Ícone de calendário (KPI de vencimentos)
   CreditCard       // Ícone de cartão (KPI de despesas pendentes)
 } from "lucide-react";
-import { 
-  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, // Gráfico de área (evolução despesas)
-  BarChart, Bar, Cell // Gráfico de barras (despesas por categoria)
-} from "recharts";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Cell, PieChart, Pie, Legend, ComposedChart, Line } from "recharts";
 
 /*
  * 📊 MOCK: Dados do gráfico de evolução de despesas (Fixas vs Variáveis)
@@ -233,9 +230,6 @@ export default function DespesasPage() {
 
               {/* 🗺️ MAPA DO TESOURO: GRÁFICOS */}
               <div className="flex gap-4 shrink-0 h-[280px]">
-                
-                {/* 🗺️ MAPA DO TESOURO: Gráfico de Evolução de Saídas (AreaChart)
-                    Plota despesas fixas vs variáveis ao longo do tempo. */}
                 <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-5 flex-1 flex flex-col shadow-sm">
                   <div className="flex justify-between items-center mb-4 shrink-0">
                     <span className="text-[14px] font-[700] text-[#1A1A2E]">Evolução de Saídas</span>
@@ -245,52 +239,37 @@ export default function DespesasPage() {
                   </div>
                   <div className="flex-1 w-full min-h-0 ml-[-20px]">
                     <ResponsiveContainer width="100%" height="100%">
-                      <AreaChart data={despesasEvolucaoData} margin={{ top: 5, right: 0, left: 0, bottom: 0 }}>
-                        <defs>
-                          <linearGradient id="colorFixas" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#6D28D9" stopOpacity={0.3}/>
-                            <stop offset="95%" stopColor="#6D28D9" stopOpacity={0}/>
-                          </linearGradient>
-                          <linearGradient id="colorVariaveis" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#A78BFA" stopOpacity={0.3}/>
-                            <stop offset="95%" stopColor="#A78BFA" stopOpacity={0}/>
-                          </linearGradient>
-                        </defs>
+                      <BarChart data={despesasEvolucaoData} margin={{ top: 5, right: 0, left: 0, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
                         <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} dy={5} />
                         <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} tickFormatter={(val) => `R$ ${val/1000}k`} />
                         <Tooltip contentStyle={{ borderRadius: '10px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)', fontSize: '11px', fontWeight: 500 }} />
-                        <Area type="monotone" dataKey="fixas" name="Fixas" stroke="#6D28D9" strokeWidth={2} fillOpacity={1} fill="url(#colorFixas)" />
-                        <Area type="monotone" dataKey="variaveis" name="Variáveis" stroke="#A78BFA" strokeWidth={2} fillOpacity={1} fill="url(#colorVariaveis)" />
-                      </AreaChart>
+                        <Legend verticalAlign="top" align="right" wrapperStyle={{ fontSize: '11px', paddingBottom: '10px' }} iconType="circle" />
+                        <Bar dataKey="fixas" name="Fixas" stackId="a" fill="#6D28D9" maxBarSize={30} />
+                        <Bar dataKey="variaveis" name="Variáveis" stackId="a" fill="#C4B5FD" radius={[4, 4, 0, 0]} maxBarSize={30} />
+                      </BarChart>
                     </ResponsiveContainer>
                   </div>
                 </div>
 
-                {/* 🗺️ MAPA DO TESOURO: Gráfico de Custos por Categoria (BarChart)
-                    Mostra as top categorias onde o dinheiro foi gasto (ordem decrescente). */}
                 <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-5 w-[380px] flex flex-col shadow-sm">
-                  <span className="text-[14px] font-[700] text-[#1A1A2E] mb-4 shrink-0">Custos por Categoria</span>
-                  <div className="flex-1 w-full min-h-0 ml-[-20px]">
+                  <span className="text-[14px] font-[700] text-[#1A1A2E] mb-4 shrink-0">Despesas por Categoria</span>
+                  <div className="flex-1 w-full min-h-0">
                     <ResponsiveContainer width="100%" height="100%">
-                      <BarChart data={despesasCategoriaData} layout="vertical" margin={{ top: 5, right: 0, left: 0, bottom: 0 }}>
-                        <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f3f4f6" />
-                        <XAxis type="number" hide />
-                        <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} width={110} />
-                        <Tooltip cursor={{fill: '#F4EEFF'}} contentStyle={{ borderRadius: '8px', border: 'none', fontSize: '11px' }} formatter={(value) => `R$ ${value}`} />
-                        <Bar dataKey="value" fill="#6D28D9" radius={[0, 4, 4, 0]} maxBarSize={20}>
+                      <PieChart>
+                        <Pie data={despesasCategoriaData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={60} outerRadius={80} paddingAngle={5}>
                           {despesasCategoriaData.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                           ))}
-                        </Bar>
-                      </BarChart>
+                        </Pie>
+                        <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', fontSize: '11px' }} formatter={(value) => `R$ ${value}`} />
+                        <Legend verticalAlign="middle" align="right" layout="vertical" iconType="circle" wrapperStyle={{ fontSize: '11px' }} />
+                      </PieChart>
                     </ResponsiveContainer>
                   </div>
                 </div>
               </div>
 
-              {/* 🗺️ MAPA DO TESOURO: TABLE PREVIEW (Apenas no modo Dashboard)
-                  Mostra os próximos 3 a 5 vencimentos rapidamente. */}
               <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-5 flex flex-col flex-1 min-h-[200px] shadow-sm overflow-hidden">
                 <div className="flex justify-between items-center mb-4 shrink-0">
                   <span className="text-[14px] font-[700] text-[#1A1A2E]">Próximos Vencimentos</span>

@@ -27,9 +27,7 @@ import Topbar from "@/components/Topbar";
 import { 
   ArrowRightLeft, Plus, Search, Filter, ArrowRight, MoreVertical, CheckCircle2, Clock, LayoutDashboard, List, Wallet, Building2, BadgePercent
 } from "lucide-react";
-import { 
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, LineChart, Line
-} from "recharts";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Cell, PieChart, Pie, Legend, ComposedChart, Line } from "recharts";
 
 // Mock Data Transferências Dashboard
 const transferenciasBancosData = [
@@ -167,41 +165,50 @@ export default function TransferenciasPage() {
 
               {/* CHARTS */}
               <div className="flex gap-4 shrink-0 h-[280px]">
-                <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-5 flex-1 flex flex-col shadow-sm">
-                  <div className="flex justify-between items-center mb-4 shrink-0">
-                    <span className="text-[14px] font-[700] text-[#1A1A2E]">Entradas vs Saídas por Banco</span>
-                  </div>
+                <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-5 w-[380px] flex flex-col shadow-sm">
+                  <span className="text-[14px] font-[700] text-[#1A1A2E] mb-4 shrink-0">Balanço de Contas</span>
                   <div className="flex-1 w-full min-h-0 ml-[-20px]">
                     <ResponsiveContainer width="100%" height="100%">
-                      <BarChart data={transferenciasBancosData} margin={{ top: 5, right: 0, left: 0, bottom: 0 }}>
-                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
-                        <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} dy={10} />
-                        <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} tickFormatter={(val) => `R$ ${val/1000}k`} />
-                        <Tooltip cursor={{fill: '#F9FAFB'}} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)', fontSize: '11px' }} formatter={(value) => `R$ ${value}`} />
-                        <Bar dataKey="saídas" name="Saídas (Remetente)" fill="#A78BFA" radius={[4, 4, 0, 0]} maxBarSize={40} />
-                        <Bar dataKey="entradas" name="Entradas (Destino)" fill="#6D28D9" radius={[4, 4, 0, 0]} maxBarSize={40} />
+                      <BarChart data={transferenciasCategoriaData} layout="vertical" margin={{ top: 5, right: 0, left: 0, bottom: 0 }}>
+                        <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f3f4f6" />
+                        <XAxis type="number" hide />
+                        <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} width={100} />
+                        <Tooltip cursor={{fill: '#F4EEFF'}} contentStyle={{ borderRadius: '8px', border: 'none', fontSize: '11px' }} formatter={(value) => `R$ ${value}`} />
+                        <Bar dataKey="saídas" name="Saídas" stackId="a" fill="#C4B5FD" radius={[0, 0, 0, 0]} maxBarSize={20} />
+                        <Bar dataKey="entradas" name="Entradas" stackId="a" fill="#6D28D9" radius={[0, 4, 4, 0]} maxBarSize={20} />
+                        <Legend verticalAlign="top" align="right" wrapperStyle={{ fontSize: '11px', paddingBottom: '10px' }} iconType="circle" />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
                 </div>
 
-                <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-5 w-[380px] flex flex-col shadow-sm">
-                  <span className="text-[14px] font-[700] text-[#1A1A2E] mb-4 shrink-0">Volume Semanal</span>
+                <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-5 flex-1 flex flex-col shadow-sm">
+                  <div className="flex justify-between items-center mb-4 shrink-0">
+                    <span className="text-[14px] font-[700] text-[#1A1A2E]">Volume Transferido (Mês)</span>
+                    <select className="text-[11px] border border-[#E5E7EB] px-2 py-1 rounded-[6px] text-[#4B5563] outline-none">
+                      <option>Este Mês</option>
+                    </select>
+                  </div>
                   <div className="flex-1 w-full min-h-0 ml-[-20px]">
                     <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={transferenciasHistoricoData} margin={{ top: 5, right: 10, left: 0, bottom: 0 }}>
+                      <AreaChart data={transferenciasEvolucaoData} margin={{ top: 5, right: 0, left: 0, bottom: 0 }}>
+                        <defs>
+                          <linearGradient id="colorVolume" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#6D28D9" stopOpacity={0.3}/>
+                            <stop offset="95%" stopColor="#6D28D9" stopOpacity={0}/>
+                          </linearGradient>
+                        </defs>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
-                        <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} dy={10} />
+                        <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} dy={5} />
                         <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} tickFormatter={(val) => `R$ ${val/1000}k`} />
-                        <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)', fontSize: '11px' }} formatter={(value) => `R$ ${value}`} />
-                        <Line type="monotone" dataKey="volume" name="Volume (R$)" stroke="#6D28D9" strokeWidth={3} dot={{ fill: '#6D28D9', strokeWidth: 2, r: 4 }} activeDot={{ r: 6 }} />
-                      </LineChart>
+                        <Tooltip contentStyle={{ borderRadius: '10px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)', fontSize: '11px', fontWeight: 500 }} />
+                        <Area type="monotone" dataKey="volume" name="Volume (R$)" stroke="#6D28D9" strokeWidth={3} fillOpacity={1} fill="url(#colorVolume)" />
+                      </AreaChart>
                     </ResponsiveContainer>
                   </div>
                 </div>
               </div>
 
-              {/* TABLE PREVIEW */}
               <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-5 flex flex-col flex-1 min-h-[200px] shadow-sm overflow-hidden">
                 <div className="flex justify-between items-center mb-4 shrink-0">
                   <span className="text-[14px] font-[700] text-[#1A1A2E]">Últimas Transferências</span>

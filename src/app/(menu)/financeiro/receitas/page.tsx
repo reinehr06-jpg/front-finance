@@ -37,9 +37,7 @@ import Topbar from "@/components/Topbar";
 import { 
   ArrowUpCircle, Plus, Search, Filter, Columns, Download, MoreVertical, ChevronLeft, ChevronRight, FileText, LayoutDashboard, List, TrendingUp, CreditCard, Building2, CalendarDays
 } from "lucide-react";
-import { 
-  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Cell
-} from "recharts";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Cell, PieChart, Pie, Legend, ComposedChart, Line } from "recharts";
 
 /*
  * 📊 MOCK: Dados do gráfico de evolução de receitas (Dízimos vs Ofertas)
@@ -199,49 +197,37 @@ export default function ReceitasPage() {
                   </div>
                   <div className="flex-1 w-full min-h-0 ml-[-20px]">
                     <ResponsiveContainer width="100%" height="100%">
-                      <AreaChart data={receitasEvolucaoData} margin={{ top: 5, right: 0, left: 0, bottom: 0 }}>
-                        <defs>
-                          <linearGradient id="colorDizimos" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#6D28D9" stopOpacity={0.3}/>
-                            <stop offset="95%" stopColor="#6D28D9" stopOpacity={0}/>
-                          </linearGradient>
-                          <linearGradient id="colorOfertas" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#8B5CF6" stopOpacity={0.3}/>
-                            <stop offset="95%" stopColor="#8B5CF6" stopOpacity={0}/>
-                          </linearGradient>
-                        </defs>
+                      <ComposedChart data={receitasEvolucaoData} margin={{ top: 5, right: 0, left: 0, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
                         <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} dy={5} />
                         <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} tickFormatter={(val) => `R$ ${val/1000}k`} />
                         <Tooltip contentStyle={{ borderRadius: '10px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)', fontSize: '11px', fontWeight: 500 }} />
-                        <Area type="monotone" dataKey="dízimos" name="Dízimos" stroke="#6D28D9" strokeWidth={2} fillOpacity={1} fill="url(#colorDizimos)" />
-                        <Area type="monotone" dataKey="ofertas" name="Ofertas" stroke="#8B5CF6" strokeWidth={2} fillOpacity={1} fill="url(#colorOfertas)" />
-                      </AreaChart>
+                        <Legend verticalAlign="top" align="right" wrapperStyle={{ fontSize: '11px', paddingBottom: '10px' }} iconType="circle" />
+                        <Bar dataKey="dízimos" name="Dízimos" fill="#6D28D9" radius={[4, 4, 0, 0]} maxBarSize={20} />
+                        <Line type="monotone" dataKey="ofertas" name="Ofertas" stroke="#A78BFA" strokeWidth={3} dot={{ fill: '#A78BFA', strokeWidth: 2, r: 4 }} activeDot={{ r: 6 }} />
+                      </ComposedChart>
                     </ResponsiveContainer>
                   </div>
                 </div>
 
                 <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-5 w-[380px] flex flex-col shadow-sm">
                   <span className="text-[14px] font-[700] text-[#1A1A2E] mb-4 shrink-0">Receitas por Categoria</span>
-                  <div className="flex-1 w-full min-h-0 ml-[-20px]">
+                  <div className="flex-1 w-full min-h-0">
                     <ResponsiveContainer width="100%" height="100%">
-                      <BarChart data={receitasCategoriaData} layout="vertical" margin={{ top: 5, right: 0, left: 0, bottom: 0 }}>
-                        <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f3f4f6" />
-                        <XAxis type="number" hide />
-                        <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} width={100} />
-                        <Tooltip cursor={{fill: '#F4EEFF'}} contentStyle={{ borderRadius: '8px', border: 'none', fontSize: '11px' }} formatter={(value) => `R$ ${value}`} />
-                        <Bar dataKey="value" fill="#6D28D9" radius={[0, 4, 4, 0]} maxBarSize={20}>
+                      <PieChart>
+                        <Pie data={receitasCategoriaData} dataKey="value" nameKey="name" cx="50%" cy="50%" innerRadius={60} outerRadius={80} paddingAngle={5}>
                           {receitasCategoriaData.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                           ))}
-                        </Bar>
-                      </BarChart>
+                        </Pie>
+                        <Tooltip contentStyle={{ borderRadius: '8px', border: 'none', fontSize: '11px' }} formatter={(value) => `R$ ${value}`} />
+                        <Legend verticalAlign="middle" align="right" layout="vertical" iconType="circle" wrapperStyle={{ fontSize: '11px' }} />
+                      </PieChart>
                     </ResponsiveContainer>
                   </div>
                 </div>
               </div>
 
-              {/* TABLE PREVIEW */}
               <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-5 flex flex-col flex-1 min-h-[200px] shadow-sm overflow-hidden">
                 <div className="flex justify-between items-center mb-4 shrink-0">
                   <span className="text-[14px] font-[700] text-[#1A1A2E]">Maiores entradas recentes</span>
