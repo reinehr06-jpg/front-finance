@@ -91,8 +91,8 @@ const despesasCategoriaData = [
   { name: "Taxas/Impostos", value: 2500 },
 ].sort((a, b) => a.value - b.value);
 
-/* 🎨 Cores para o gráfico de barras (tons de vermelho — identidade visual de despesas) */
-const COLORS = ["#EF4444", "#F87171", "#FCA5A5", "#FECACA"];
+/* 🎨 Cores para o gráfico de barras (tons de roxo — identidade visual do sistema) */
+const COLORS = ["#6D28D9", "#8B5CF6", "#A78BFA", "#C4B5FD"];
 
 export default function DespesasPage() {
   const [viewMode, setViewMode] = useState<"dashboard" | "lista">("dashboard");
@@ -187,12 +187,12 @@ export default function DespesasPage() {
                     <div className="flex items-baseline gap-1 mt-1">
                       <span className="text-[22px] font-[800] text-[#1A1A2E]">1.450<span className="text-[14px]">,00</span></span>
                     </div>
-                    <span className="text-[11px] font-[600] text-[#F59E0B] mt-1 flex items-center gap-1">
+                    <span className="text-[11px] font-[600] text-[#A78BFA] mt-1 flex items-center gap-1">
                       Em 2 boletos
                     </span>
                   </div>
                   <div className="w-[42px] h-[42px] rounded-[10px] bg-[#FFFBEB] flex items-center justify-center shrink-0">
-                    <CalendarDays className="w-[20px] h-[20px] text-[#F59E0B]" strokeWidth={2.4} />
+                    <CalendarDays className="w-[20px] h-[20px] text-[#A78BFA]" strokeWidth={2.4} />
                   </div>
                 </div>
 
@@ -248,20 +248,20 @@ export default function DespesasPage() {
                       <AreaChart data={despesasEvolucaoData} margin={{ top: 5, right: 0, left: 0, bottom: 0 }}>
                         <defs>
                           <linearGradient id="colorFixas" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#EF4444" stopOpacity={0.3}/>
-                            <stop offset="95%" stopColor="#EF4444" stopOpacity={0}/>
+                            <stop offset="5%" stopColor="#6D28D9" stopOpacity={0.3}/>
+                            <stop offset="95%" stopColor="#6D28D9" stopOpacity={0}/>
                           </linearGradient>
                           <linearGradient id="colorVariaveis" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="5%" stopColor="#F59E0B" stopOpacity={0.3}/>
-                            <stop offset="95%" stopColor="#F59E0B" stopOpacity={0}/>
+                            <stop offset="5%" stopColor="#A78BFA" stopOpacity={0.3}/>
+                            <stop offset="95%" stopColor="#A78BFA" stopOpacity={0}/>
                           </linearGradient>
                         </defs>
                         <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
                         <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} dy={5} />
                         <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} tickFormatter={(val) => `R$ ${val/1000}k`} />
                         <Tooltip contentStyle={{ borderRadius: '10px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)', fontSize: '11px', fontWeight: 500 }} />
-                        <Area type="monotone" dataKey="fixas" name="Fixas" stroke="#EF4444" strokeWidth={2} fillOpacity={1} fill="url(#colorFixas)" />
-                        <Area type="monotone" dataKey="variaveis" name="Variáveis" stroke="#F59E0B" strokeWidth={2} fillOpacity={1} fill="url(#colorVariaveis)" />
+                        <Area type="monotone" dataKey="fixas" name="Fixas" stroke="#6D28D9" strokeWidth={2} fillOpacity={1} fill="url(#colorFixas)" />
+                        <Area type="monotone" dataKey="variaveis" name="Variáveis" stroke="#A78BFA" strokeWidth={2} fillOpacity={1} fill="url(#colorVariaveis)" />
                       </AreaChart>
                     </ResponsiveContainer>
                   </div>
@@ -278,7 +278,7 @@ export default function DespesasPage() {
                         <XAxis type="number" hide />
                         <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} width={110} />
                         <Tooltip cursor={{fill: '#F4EEFF'}} contentStyle={{ borderRadius: '8px', border: 'none', fontSize: '11px' }} formatter={(value) => `R$ ${value}`} />
-                        <Bar dataKey="value" fill="#EF4444" radius={[0, 4, 4, 0]} maxBarSize={20}>
+                        <Bar dataKey="value" fill="#6D28D9" radius={[0, 4, 4, 0]} maxBarSize={20}>
                           {despesasCategoriaData.map((entry, index) => (
                             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                           ))}
@@ -315,7 +315,7 @@ export default function DespesasPage() {
                           <td className="py-2.5 text-[11px] font-[500] text-[#4B5563]">{despesa.fornecedor}</td>
                           <td className="py-2.5 text-[12px] font-[800] text-[#DC2626] text-right">{despesa.valor}</td>
                           <td className="py-2.5 text-center">
-                            <span className={`inline-block px-2 py-0.5 rounded-[4px] text-[10px] font-[700] ${despesa.status === 'Pago' ? 'bg-[#ECFDF5] text-[#10B981]' : despesa.status === 'Vencido' ? 'bg-[#FEF2F2] text-[#EF4444]' : 'bg-[#EFF6FF] text-[#3B82F6]'}`}>
+                            <span className={`inline-block px-2 py-0.5 rounded-[4px] text-[10px] font-[700] ${despesa.status === 'Pago' ? 'bg-[#ECFDF5] text-[#10B981]' : despesa.status === 'Vencido' ? 'bg-[#FEF2F2] text-[#6D28D9]' : 'bg-[#EFF6FF] text-[#3B82F6]'}`}>
                               {despesa.status}
                             </span>
                           </td>
@@ -413,7 +413,7 @@ export default function DespesasPage() {
                         <td className="py-3 px-5 text-center">
                           <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-[700] ${
                             despesa.status === 'Pago' ? 'bg-[#ECFDF5] text-[#10B981]' : 
-                            despesa.status === 'Vencido' ? 'bg-[#FEF2F2] text-[#EF4444]' : 
+                            despesa.status === 'Vencido' ? 'bg-[#FEF2F2] text-[#6D28D9]' : 
                             despesa.status === 'Agendado' ? 'bg-[#EFF6FF] text-[#3B82F6]' : 
                             despesa.status === 'Cancelado' ? 'bg-[#F3F4F6] text-[#6B7280]' :
                             despesa.status === 'Aguardando aprovação' ? 'bg-[#FEF08A] text-[#854D0E]' :

@@ -178,7 +178,7 @@ export default function TransferenciasPage() {
                         <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} dy={10} />
                         <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#9CA3AF' }} tickFormatter={(val) => `R$ ${val/1000}k`} />
                         <Tooltip cursor={{fill: '#F9FAFB'}} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)', fontSize: '11px' }} formatter={(value) => `R$ ${value}`} />
-                        <Bar dataKey="saídas" name="Saídas (Remetente)" fill="#F59E0B" radius={[4, 4, 0, 0]} maxBarSize={40} />
+                        <Bar dataKey="saídas" name="Saídas (Remetente)" fill="#A78BFA" radius={[4, 4, 0, 0]} maxBarSize={40} />
                         <Bar dataKey="entradas" name="Entradas (Destino)" fill="#6D28D9" radius={[4, 4, 0, 0]} maxBarSize={40} />
                       </BarChart>
                     </ResponsiveContainer>
