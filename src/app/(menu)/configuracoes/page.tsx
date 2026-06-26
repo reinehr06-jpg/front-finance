@@ -71,10 +71,10 @@ export default function ConfiguracoesPage() {
     },
     {
       id: "documentos",
-      titulo: "Documentos e Recibos",
-      descricao: "Modelos de recibo, dados exibidos e configurações de emissão.",
+      titulo: "Modelos e Recibos",
+      descricao: "Modelos de recibo e prebenda, dados exibidos e configurações de emissão.",
       icone: <FileText className="w-[22px] h-[22px] text-[#6D28D9]" strokeWidth={1.5} />,
-      link: "/configuracoes/documentos"
+      link: "/configuracoes/modelos"
     },
     {
       id: "preferencias",

@@ -95,8 +95,7 @@ export const navSections = [
   {
     title: "CONFIGURAÇÕES",
     items: [
-      { label: "Configurações Globais", icon: Settings, href: "/configuracoes" },
-      { label: "Modelos de Recibos", icon: FileSpreadsheet, href: "/configuracoes/modelos" },
+      { label: "Configurações", icon: Settings, href: "/configuracoes" },
     ],
   }
 ];
