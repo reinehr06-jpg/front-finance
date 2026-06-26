@@ -20,6 +20,7 @@ export default function NovoFuncionarioPage() {
 
   // Estados dos Accordions
   const [openAccordion, setOpenAccordion] = useState<string | null>("pessoal");
+  const [tipoContrato, setTipoContrato] = useState("clt");
   
   return (
     <div className="flex min-h-screen w-screen overflow-hidden font-inter bg-[#F5F5F7]">
@@ -155,7 +156,7 @@ export default function NovoFuncionarioPage() {
 
                       <div className="col-span-6 flex flex-col gap-[8px]">
                         <label className="text-[12px] font-[600] text-[#374151]">
-                          Cargo / Função <span className="text-[#EF4444] ml-0.5">*</span>
+                          {tipoContrato === "pj" ? "Serviço Prestado" : "Cargo / Função"} <span className="text-[#EF4444] ml-0.5">*</span>
                         </label>
                         <CustomSelect
                           value=""
@@ -171,8 +172,8 @@ export default function NovoFuncionarioPage() {
                           Tipo de Contrato
                         </label>
                         <CustomSelect
-                          value=""
-                          onChange={() => {}}
+                          value={tipoContrato}
+                          onChange={setTipoContrato}
                           placeholder="CLT, Prestador..."
                           options={[{value: "clt", label: "CLT"}, {value: "pj", label: "PJ"}]}
                           className="h-[38px]"
@@ -185,6 +186,18 @@ export default function NovoFuncionarioPage() {
                         </label>
                         <input type="date" className="h-[38px] w-full border border-[#E5E7EB] rounded-[8px] px-[12px] text-[13px] text-[#111827] outline-none focus:border-[#6D28D9]" />
                       </div>
+
+                      {tipoContrato === "pj" && (
+                        <div className="col-span-12 flex flex-col gap-[8px] mt-2">
+                          <label className="text-[12px] font-[600] text-[#374151]">
+                            Descrição Detalhada do Serviço Prestado
+                          </label>
+                          <textarea 
+                            placeholder="Descreva as atividades e escopo do serviço prestado pelo PJ..." 
+                            className="h-[80px] w-full border border-[#E5E7EB] rounded-[8px] p-[12px] text-[13px] text-[#111827] outline-none focus:border-[#6D28D9] resize-none"
+                          ></textarea>
+                        </div>
+                      )}
                     </div>
 
                   </div>

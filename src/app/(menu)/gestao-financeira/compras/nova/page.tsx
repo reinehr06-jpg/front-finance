@@ -261,8 +261,6 @@ export default function NovaCompraPage() {
                       <div className="flex items-center justify-between">
                         <label className="text-[12px] font-[600] text-[#374151]">Itens da Solicitação</label>
                         <div className="flex items-center gap-2">
-                          <button type="button" className="text-[11px] font-[600] text-[#6D28D9] bg-[#F3E8FF] px-2 py-1 rounded-[6px] hover:bg-[#E9D5FF] transition-colors flex items-center gap-1 shadow-sm"><Download className="w-[12px] h-[12px]" /> Modelo (Excel)</button>
-                          <button type="button" onClick={handleImportIA} className="text-[11px] font-[600] text-[#6D28D9] bg-[#F3E8FF] px-2 py-1 rounded-[6px] hover:bg-[#E9D5FF] transition-colors flex items-center gap-1 shadow-sm"><Upload className="w-[12px] h-[12px]" /> Enviar para IA Preencher</button>
                         </div>
                       </div>
                       <div className="border border-[#E5E7EB] rounded-[8px] overflow-hidden">

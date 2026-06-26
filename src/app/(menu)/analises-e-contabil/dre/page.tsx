@@ -46,15 +46,15 @@ import {
 export default function DREPage() {
   // 🗺️ MAPA DO TESOURO: Estado que controla o Accordion da Tabela.
   // Se a string 'receitas' estiver no array, as linhas filhas (1.1, 1.2) aparecerão.
-  const [expandedRows, setExpandedRows] = useState<string[]>(['receitas', 'despesas']);
+  const [expandedRow, setExpandedRow] = useState<string | null>('receitas');
 
   // 🗺️ MAPA DO TESOURO: Função disparada ao clicar na linha principal.
   // Ela verifica se o ID da linha já está aberto; se sim, remove (fecha); se não, adiciona (abre).
   const toggleRow = (rowId: string) => {
-    if (expandedRows.includes(rowId)) {
-      setExpandedRows(expandedRows.filter(id => id !== rowId));
+    if (expandedRow === rowId) {
+      setExpandedRow(null);
     } else {
-      setExpandedRows([...expandedRows, rowId]);
+      setExpandedRow(rowId);
     }
   };
 
@@ -137,7 +137,7 @@ export default function DREPage() {
                       onClick={() => toggleRow('receitas')}
                     >
                       <td className="py-4 px-6 flex items-center gap-2">
-                        {expandedRows.includes('receitas') ? <ChevronDown className="w-[16px] h-[16px] text-[#166534]" strokeWidth={3} /> : <ChevronRight className="w-[16px] h-[16px] text-[#166534]" strokeWidth={3} />}
+                        {expandedRow === 'receitas' ? <ChevronDown className="w-[16px] h-[16px] text-[#166534]" strokeWidth={3} /> : <ChevronRight className="w-[16px] h-[16px] text-[#166534]" strokeWidth={3} />}
                         <span className="text-[15px] font-[800] text-[#166534] uppercase tracking-wider">1. Receitas Totais Brutas</span>
                       </td>
                       <td className="py-4 px-6 text-right">
@@ -149,8 +149,8 @@ export default function DREPage() {
                     </tr>
 
                     {/* 🗺️ MAPA DO TESOURO: SUB-ITENS DE RECEITAS (Renderização Condicional) */}
-                    {/* Só aparecem na tela se 'receitas' estiver dentro do estado expandedRows. */}
-                    {expandedRows.includes('receitas') && (
+                    {/* Só aparecem na tela se 'receitas' estiver selecionada. */}
+                    {expandedRow === 'receitas' && (
                       <>
                         <tr className="border-b border-[#F1F1F4] hover:bg-[#F9FAFB]">
                           <td className="py-3 px-6 pl-14 text-[13px] font-[600] text-[#4B5563]">1.1 Dízimos e Contribuições</td>
@@ -204,7 +204,7 @@ export default function DREPage() {
                       onClick={() => toggleRow('despesas')}
                     >
                       <td className="py-4 px-6 flex items-center gap-2">
-                        {expandedRows.includes('despesas') ? <ChevronDown className="w-[16px] h-[16px] text-[#991B1B]" strokeWidth={3} /> : <ChevronRight className="w-[16px] h-[16px] text-[#991B1B]" strokeWidth={3} />}
+                        {expandedRow === 'despesas' ? <ChevronDown className="w-[16px] h-[16px] text-[#991B1B]" strokeWidth={3} /> : <ChevronRight className="w-[16px] h-[16px] text-[#991B1B]" strokeWidth={3} />}
                         <span className="text-[15px] font-[800] text-[#991B1B] uppercase tracking-wider">4. (-) Custos e Despesas Operacionais</span>
                       </td>
                       <td className="py-4 px-6 text-right">
@@ -216,7 +216,7 @@ export default function DREPage() {
                     </tr>
 
                     {/* 🗺️ MAPA DO TESOURO: SUB-ITENS DE DESPESAS */}
-                    {expandedRows.includes('despesas') && (
+                    {expandedRow === 'despesas' && (
                       <>
                         <tr className="border-b border-[#F1F1F4] hover:bg-[#F9FAFB]">
                           <td className="py-3 px-6 pl-14 text-[13px] font-[600] text-[#4B5563]">4.1 Despesas com Pessoal / Pastoral</td>

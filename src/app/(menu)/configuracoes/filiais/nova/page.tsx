@@ -18,6 +18,7 @@ export default function NovaFilialPage() {
 
   // Estados dos Accordions
   const [openAccordion, setOpenAccordion] = useState<string | null>("info");
+  const [pais, setPais] = useState<string>("Brasil");
   
   return (
     <div className="flex min-h-screen w-screen overflow-hidden font-inter bg-[#F5F5F7]">
@@ -80,9 +81,27 @@ export default function NovaFilialPage() {
                       </div>
 
                       <div className="col-span-4 flex flex-col gap-[8px]">
-                        <label className="text-[12px] font-[600] text-[#374151]">CNPJ</label>
-                        <input type="text" placeholder="00.000.000/0000-00" className="h-[38px] w-full border border-[#E5E7EB] rounded-[8px] px-[12px] text-[13px] text-[#111827] outline-none focus:border-[#6D28D9]" />
+                        <label className="text-[12px] font-[600] text-[#374151]">País</label>
+                        <CustomSelect
+                          value={pais}
+                          onChange={setPais}
+                          placeholder="Selecione o país..."
+                          options={[
+                            {value: "Brasil", label: "Brasil"},
+                            {value: "Estados Unidos", label: "Estados Unidos"},
+                            {value: "Portugal", label: "Portugal"},
+                            {value: "Outro", label: "Outro"}
+                          ]}
+                          className="h-[38px]"
+                        />
                       </div>
+
+                      {pais === "Brasil" && (
+                        <div className="col-span-4 flex flex-col gap-[8px]">
+                          <label className="text-[12px] font-[600] text-[#374151]">CNPJ</label>
+                          <input type="text" placeholder="00.000.000/0000-00" className="h-[38px] w-full border border-[#E5E7EB] rounded-[8px] px-[12px] text-[13px] text-[#111827] outline-none focus:border-[#6D28D9]" />
+                        </div>
+                      )}
 
                       <div className="col-span-4 flex flex-col gap-[8px]">
                         <label className="text-[12px] font-[600] text-[#374151]">CEP</label>

@@ -1,19 +1,13 @@
 import {
-  Home,
   ArrowUpCircle,
   ArrowDownCircle,
   ArrowRightLeft,
   BarChart3,
-  Building2,
-  Tags,
   Wallet,
   Settings,
-  HelpCircle,
   Layers,
   UsersRound,
-  ShoppingCart,
   Calculator,
-  Package,
   FileSpreadsheet
 } from "lucide-react";
 
@@ -101,7 +95,8 @@ export const navSections = [
   {
     title: "CONFIGURAÇÕES",
     items: [
-      { label: "Configurações", icon: Settings, href: "/configuracoes" },
+      { label: "Configurações Globais", icon: Settings, href: "/configuracoes" },
+      { label: "Modelos de Recibos", icon: FileSpreadsheet, href: "/configuracoes/modelos" },
     ],
   }
 ];
