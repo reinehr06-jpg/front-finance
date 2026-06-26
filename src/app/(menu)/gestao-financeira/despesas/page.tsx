@@ -128,13 +128,13 @@ export default function DespesasPage() {
               <div className="flex items-center bg-[#F3F4F6] p-1 rounded-[8px] mr-2">
                 <button 
                   onClick={() => setViewMode("dashboard")}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-[6px] text-[13px] font-[600] transition-colors ${viewMode === "dashboard" ? 'bg-white text-[#DC2626] shadow-sm' : 'text-[#6B7280] hover:text-[#374151]'}`}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-[6px] text-[13px] font-[600] transition-colors ${viewMode === "dashboard" ? 'bg-white text-[#7C3AED] shadow-sm' : 'text-[#6B7280] hover:text-[#374151]'}`}
                 >
                   <LayoutDashboard className="w-[14px] h-[14px]" /> Dashboard
                 </button>
                 <button 
                   onClick={() => setViewMode("lista")}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-[6px] text-[13px] font-[600] transition-colors ${viewMode === "lista" ? 'bg-white text-[#DC2626] shadow-sm' : 'text-[#6B7280] hover:text-[#374151]'}`}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-[6px] text-[13px] font-[600] transition-colors ${viewMode === "lista" ? 'bg-white text-[#7C3AED] shadow-sm' : 'text-[#6B7280] hover:text-[#374151]'}`}
                 >
                   <List className="w-[14px] h-[14px]" /> Lista
                 </button>
@@ -143,7 +143,7 @@ export default function DespesasPage() {
               <button className="flex items-center gap-2 px-4 py-2 border border-[#E5E7EB] rounded-[8px] text-[13px] font-[600] text-[#4B5563] hover:bg-[#F9FAFB] transition-colors shadow-sm">
                 <Download className="w-[14px] h-[14px]" /> Exportar
               </button>
-              <Link href="/gestao-financeira/despesas/nova" className="bg-[#6D28D9] hover:bg-[#5B21B6] transition-colors text-white px-4 py-2 rounded-[8px] text-[13px] font-[700] flex items-center gap-2 shadow-sm">
+              <Link href="/gestao-financeira/despesas/nova" className="bg-[#7C3AED] hover:bg-[#6D28D9] transition-colors text-white px-4 py-2 rounded-[8px] text-[13px] font-[700] flex items-center gap-2 shadow-sm">
                 <Plus className="w-[16px] h-[16px]" strokeWidth={2.5} />
                 Nova Despesa
               </Link>
@@ -330,8 +330,8 @@ export default function DespesasPage() {
                   <div className="relative">
                     <input 
                       type="text" 
-                      placeholder="Buscar por descrição, fornecedor ou NF..." 
-                      className="w-[280px] h-[36px] border border-[#E5E7EB] rounded-[8px] pl-9 pr-3 text-[13px] outline-none focus:border-[#DC2626]"
+                      placeholder="Buscar por descrição, recibo ou origem..." 
+                      className="w-[280px] h-[36px] border border-[#E5E7EB] rounded-[8px] pl-9 pr-3 text-[13px] outline-none focus:border-[#7C3AED]"
                     />
                     <Search className="w-[14px] h-[14px] text-[#9CA3AF] absolute left-3 top-1/2 -translate-y-1/2" />
                   </div>
@@ -441,15 +441,9 @@ export default function DespesasPage() {
                   </div>
                   
                   <div className="flex items-center gap-1">
-                    <button className="w-[28px] h-[28px] flex items-center justify-center rounded-[6px] text-[#9CA3AF] hover:bg-[#E5E7EB] hover:text-[#374151] transition-colors disabled:opacity-50" disabled>
-                      <ChevronLeft className="w-[14px] h-[14px]" />
-                    </button>
-                    <button className="w-[28px] h-[28px] flex items-center justify-center rounded-[6px] bg-[#FEF2F2] text-[#DC2626] font-[700] text-[12px] transition-colors">
-                      1
-                    </button>
-                    <button className="w-[28px] h-[28px] flex items-center justify-center rounded-[6px] text-[#9CA3AF] hover:bg-[#E5E7EB] hover:text-[#374151] transition-colors disabled:opacity-50" disabled>
-                      <ChevronRight className="w-[14px] h-[14px]" />
-                    </button>
+                    <button className="w-[28px] h-[28px] flex items-center justify-center rounded-[6px] text-[#9CA3AF] disabled:opacity-50" disabled><ChevronLeft className="w-[14px] h-[14px]" /></button>
+                    <button className="w-[28px] h-[28px] flex items-center justify-center rounded-[6px] bg-[#F4F1FD] text-[#7C3AED] font-[700] text-[12px]">1</button>
+                    <button className="w-[28px] h-[28px] flex items-center justify-center rounded-[6px] text-[#9CA3AF] disabled:opacity-50" disabled><ChevronRight className="w-[14px] h-[14px]" /></button>
                   </div>
                 </div>
 

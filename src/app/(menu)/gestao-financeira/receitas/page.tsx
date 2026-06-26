@@ -20,9 +20,9 @@ const receitasEvolucaoData = [
 ];
 
 const receitasCategoriaData = [
-  { name: "Dízimos", value: 45000 },
-  { name: "Ofertas Gerais", value: 12000 },
-  { name: "Ofertas Especiais", value: 8000 },
+  { name: "Contrib. Regulares", value: 45000 },
+  { name: "Doações e Ofertas", value: 12000 },
+  { name: "Campanhas", value: 8000 },
   { name: "Cantina/Eventos", value: 4500 },
 ].sort((a, b) => a.value - b.value);
 
@@ -30,11 +30,11 @@ const COLORS = ["#10B981", "#34D399", "#6EE7B7", "#A7F3D0"];
 
 export default function ReceitasPage() {
   const [viewMode, setViewMode] = useState<"dashboard" | "lista">("dashboard");
-  const [activeTab, setActiveTab] = useState("Dízimos");
+  const [activeTab, setActiveTab] = useState("Contribuições");
 
   const mockReceitas = [
-    { id: 1, data: "24/05/2024", desc: "Dízimo Congregação Central", conta: "Itaú - CC 1234", cat: "Dízimos", origem: "João Silva", valor: "R$ 1.500,00", nf: "-" },
-    { id: 2, data: "24/05/2024", desc: "Oferta Culto de Domingo", conta: "Itaú - CC 1234", cat: "Ofertas", origem: "Culto", valor: "R$ 845,50", nf: "-" },
+    { id: 1, data: "24/05/2024", desc: "Contribuição Mensal - Sede", conta: "Itaú - CC 1234", cat: "Contribuições", origem: "João Silva", valor: "R$ 1.500,00", nf: "-" },
+    { id: 2, data: "24/05/2024", desc: "Doação - Evento Principal", conta: "Itaú - CC 1234", cat: "Doações", origem: "Evento Principal", valor: "R$ 845,50", nf: "-" },
     { id: 3, data: "25/05/2024", desc: "Venda de Livros - Conferência", conta: "Caixa Físico", cat: "Vendas", origem: "Livraria", valor: "R$ 320,00", nf: "NF-0012" },
   ];
 
@@ -62,13 +62,13 @@ export default function ReceitasPage() {
               <div className="flex items-center bg-[#F3F4F6] p-1 rounded-[8px] mr-2">
                 <button 
                   onClick={() => setViewMode("dashboard")}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-[6px] text-[13px] font-[600] transition-colors ${viewMode === "dashboard" ? 'bg-white text-[#10B981] shadow-sm' : 'text-[#6B7280] hover:text-[#374151]'}`}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-[6px] text-[13px] font-[600] transition-colors ${viewMode === "dashboard" ? 'bg-white text-[#7C3AED] shadow-sm' : 'text-[#6B7280] hover:text-[#374151]'}`}
                 >
                   <LayoutDashboard className="w-[14px] h-[14px]" /> Dashboard
                 </button>
                 <button 
                   onClick={() => setViewMode("lista")}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-[6px] text-[13px] font-[600] transition-colors ${viewMode === "lista" ? 'bg-white text-[#10B981] shadow-sm' : 'text-[#6B7280] hover:text-[#374151]'}`}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-[6px] text-[13px] font-[600] transition-colors ${viewMode === "lista" ? 'bg-white text-[#7C3AED] shadow-sm' : 'text-[#6B7280] hover:text-[#374151]'}`}
                 >
                   <List className="w-[14px] h-[14px]" /> Lista
                 </button>
@@ -77,7 +77,7 @@ export default function ReceitasPage() {
               <button className="flex items-center gap-2 px-4 py-2 border border-[#E5E7EB] rounded-[8px] text-[13px] font-[600] text-[#4B5563] hover:bg-[#F9FAFB] transition-colors shadow-sm">
                 <Download className="w-[14px] h-[14px]" /> Exportar
               </button>
-              <Link href="/gestao-financeira/receitas/nova" className="bg-[#10B981] hover:bg-[#059669] transition-colors text-white px-4 py-2 rounded-[8px] text-[13px] font-[700] flex items-center gap-2 shadow-sm">
+              <Link href="/gestao-financeira/receitas/nova" className="bg-[#7C3AED] hover:bg-[#6D28D9] transition-colors text-white px-4 py-2 rounded-[8px] text-[13px] font-[700] flex items-center gap-2 shadow-sm">
                 <Plus className="w-[16px] h-[16px]" strokeWidth={2.5} />
                 Nova Receita
               </Link>
@@ -122,7 +122,7 @@ export default function ReceitasPage() {
 
                 <div className="bg-white rounded-[12px] border border-[#E5E7EB] p-5 flex items-center justify-between shadow-sm">
                   <div className="flex flex-col">
-                    <span className="text-[12px] font-[600] text-[#6B7280]">Ticket Médio (Dízimo)</span>
+                    <span className="text-[12px] font-[600] text-[#6B7280]">Ticket Médio (Contribuições)</span>
                     <div className="flex items-baseline gap-1 mt-1">
                       <span className="text-[22px] font-[800] text-[#1A1A2E]">450<span className="text-[14px]">,00</span></span>
                     </div>
@@ -139,7 +139,7 @@ export default function ReceitasPage() {
                   <div className="flex flex-col">
                     <span className="text-[12px] font-[600] text-[#6B7280]">Maior Fonte</span>
                     <div className="flex items-baseline gap-1 mt-1">
-                      <span className="text-[18px] font-[800] text-[#1A1A2E] truncate">Congregação Sede</span>
+                      <span className="text-[18px] font-[800] text-[#1A1A2E] truncate">Matriz (Sede)</span>
                     </div>
                     <span className="text-[11px] font-[600] text-[#6B7280] mt-1 flex items-center gap-1">
                       Responsável por 65% das entradas
@@ -228,11 +228,11 @@ export default function ReceitasPage() {
               <div className="p-4 border-b border-[#F1F1F4] flex items-center justify-between gap-3 shrink-0">
                 
                 <div className="flex items-center gap-1 bg-[#F3F4F6] p-1 rounded-[8px]">
-                  {["Todas", "Dízimos", "Ofertas", "Eventos", "Doações"].map((tab) => (
+                  {["Todas", "Contribuições", "Doações", "Eventos", "Vendas"].map((tab) => (
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
-                      className={`px-4 py-1.5 rounded-[6px] text-[13px] font-[600] transition-colors ${activeTab === tab ? 'bg-white text-[#1A1A2E] shadow-sm' : 'text-[#6B7280] hover:text-[#374151]'}`}
+                      className={`px-4 py-1.5 rounded-[6px] text-[13px] font-[600] transition-colors ${activeTab === tab ? 'bg-white text-[#7C3AED] shadow-sm' : 'text-[#6B7280] hover:text-[#374151]'}`}
                     >
                       {tab}
                     </button>
@@ -243,8 +243,8 @@ export default function ReceitasPage() {
                   <div className="relative">
                     <input 
                       type="text" 
-                      placeholder="Buscar por descrição, origem ou NF..." 
-                      className="w-[280px] h-[36px] border border-[#E5E7EB] rounded-[8px] pl-9 pr-3 text-[13px] outline-none focus:border-[#10B981]"
+                      placeholder="Buscar por descrição, recibo ou origem..." 
+                      className="w-[280px] h-[36px] border border-[#E5E7EB] rounded-[8px] pl-9 pr-3 text-[13px] outline-none focus:border-[#7C3AED]"
                     />
                     <Search className="w-[14px] h-[14px] text-[#9CA3AF] absolute left-3 top-1/2 -translate-y-1/2" />
                   </div>
@@ -333,15 +333,9 @@ export default function ReceitasPage() {
                   </div>
                   
                   <div className="flex items-center gap-1">
-                    <button className="w-[28px] h-[28px] flex items-center justify-center rounded-[6px] text-[#9CA3AF] hover:bg-[#E5E7EB] hover:text-[#374151] transition-colors disabled:opacity-50" disabled>
-                      <ChevronLeft className="w-[14px] h-[14px]" />
-                    </button>
-                    <button className="w-[28px] h-[28px] flex items-center justify-center rounded-[6px] bg-[#ECFDF5] text-[#10B981] font-[700] text-[12px] transition-colors">
-                      1
-                    </button>
-                    <button className="w-[28px] h-[28px] flex items-center justify-center rounded-[6px] text-[#9CA3AF] hover:bg-[#E5E7EB] hover:text-[#374151] transition-colors disabled:opacity-50" disabled>
-                      <ChevronRight className="w-[14px] h-[14px]" />
-                    </button>
+                    <button className="w-[28px] h-[28px] flex items-center justify-center rounded-[6px] text-[#9CA3AF] disabled:opacity-50" disabled><ChevronLeft className="w-[14px] h-[14px]" /></button>
+                    <button className="w-[28px] h-[28px] flex items-center justify-center rounded-[6px] bg-[#F4F1FD] text-[#7C3AED] font-[700] text-[12px]">1</button>
+                    <button className="w-[28px] h-[28px] flex items-center justify-center rounded-[6px] text-[#9CA3AF] disabled:opacity-50" disabled><ChevronRight className="w-[14px] h-[14px]" /></button>
                   </div>
                 </div>
 

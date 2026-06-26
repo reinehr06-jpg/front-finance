@@ -24,10 +24,10 @@ export default function ContasAReceberPage() {
   const [activeTab, setActiveTab] = useState("Todas");
 
   const mockContas = [
-    { id: 1, data: "15/05/2024", desc: "Venda de Livros - Pr. Carlos", cliente: "Livraria", cat: "Vendas", conta: "Caixa Físico", valor: "R$ 350,00", status: "Atrasado", diasAtraso: 9, nf: "NF-112" },
-    { id: 2, data: "24/05/2024", desc: "Doação Evento Jovens", cliente: "Ministério Jovem", cat: "Doações", conta: "Banco Itaú", valor: "R$ 200,00", status: "Para Hoje", diasAtraso: 0, nf: "-" },
-    { id: 3, data: "26/05/2024", desc: "Campanha Prédio", cliente: "Congregação Central", cat: "Campanhas", conta: "Bradesco", valor: "R$ 1.200,00", status: "A Receber", diasAtraso: 0, nf: "-" },
-    { id: 4, data: "28/05/2024", desc: "Mensalidade Escola", cliente: "Alunos EBD", cat: "Educação", conta: "Banco do Brasil", valor: "R$ 800,00", status: "A Receber", diasAtraso: 0, nf: "MB-23" },
+    { id: 1, data: "15/05/2024", desc: "Venda de Livros - Palestra", cliente: "Livraria", cat: "Vendas", conta: "Caixa Físico", valor: "R$ 350,00", status: "Atrasado", diasAtraso: 9, nf: "NF-112" },
+    { id: 2, data: "24/05/2024", desc: "Doação Evento de Jovens", cliente: "Depto. de Jovens", cat: "Doações", conta: "Banco Itaú", valor: "R$ 200,00", status: "Para Hoje", diasAtraso: 0, nf: "-" },
+    { id: 3, data: "26/05/2024", desc: "Campanha de Reforma", cliente: "Matriz (Sede)", cat: "Campanhas", conta: "Bradesco", valor: "R$ 1.200,00", status: "A Receber", diasAtraso: 0, nf: "-" },
+    { id: 4, data: "28/05/2024", desc: "Mensalidade Curso Liderança", cliente: "Alunos do Curso", cat: "Educação", conta: "Banco do Brasil", valor: "R$ 800,00", status: "A Receber", diasAtraso: 0, nf: "MB-23" },
   ];
 
   return (
