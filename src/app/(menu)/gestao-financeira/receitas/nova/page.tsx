@@ -31,8 +31,6 @@ export default function NovaReceitaPage() {
 
   const [dataEmissao, setDataEmissao] = useState("");
   const [dataVencimento, setDataVencimento] = useState("");
-  const [dataPrevista, setDataPrevista] = useState("");
-  const [dataEfetiva, setDataEfetiva] = useState("");
   const [formaPagamento, setFormaPagamento] = useState("");
   const [maxParcelas, setMaxParcelas] = useState("1");
 
@@ -89,17 +87,7 @@ export default function NovaReceitaPage() {
                   <div className="p-[24px] flex flex-col gap-[24px]">
                     
                     <div className="grid grid-cols-12 gap-[24px]">
-                      <div className="col-span-3 flex flex-col gap-[8px]">
-                        <label className="text-[12px] font-[600] text-[#374151]">
-                          Valor Previsto
-                        </label>
-                        <div className="relative">
-                          <span className="absolute left-[12px] top-1/2 -translate-y-1/2 text-[14px] font-[700] text-[#9CA3AF]">R$</span>
-                          <input type="text" placeholder="0,00" className="h-[38px] w-full border border-[#E5E7EB] rounded-[8px] pl-[36px] pr-[12px] text-[14px] font-[700] text-[#6B7280] outline-none hover:border-[#D1D5DB] focus:border-[#6D28D9] transition-all bg-white" />
-                        </div>
-                      </div>
-
-                      <div className="col-span-3 flex flex-col gap-[8px]">
+                      <div className="col-span-4 flex flex-col gap-[8px]">
                         <label className="text-[12px] font-[600] text-[#374151]">
                           Valor Recebido <span className="text-[#EF4444] ml-0.5">*</span>
                         </label>
@@ -109,7 +97,7 @@ export default function NovaReceitaPage() {
                         </div>
                       </div>
 
-                      <div className="col-span-3 flex flex-col gap-[8px]">
+                      <div className="col-span-4 flex flex-col gap-[8px]">
                         <label className="text-[12px] font-[600] text-[#374151]">
                           Conta Financeira <span className="text-[#EF4444] ml-0.5">*</span>
                         </label>
@@ -122,7 +110,7 @@ export default function NovaReceitaPage() {
                         />
                       </div>
 
-                      <div className="col-span-3 flex flex-col gap-[8px]">
+                      <div className="col-span-4 flex flex-col gap-[8px]">
                         <label className="text-[12px] font-[600] text-[#374151]">
                           Categoria Principal <span className="text-[#EF4444] ml-0.5">*</span>
                         </label>
@@ -136,32 +124,18 @@ export default function NovaReceitaPage() {
                         />
                       </div>
 
-                      <div className="col-span-3 flex flex-col gap-[8px]">
+                      <div className="col-span-6 flex flex-col gap-[8px]">
                         <label className="text-[12px] font-[600] text-[#374151]">
                           Data de Emissão <span className="text-[#EF4444] ml-0.5">*</span>
                         </label>
                         <CustomDatePicker value={dataEmissao} onChange={setDataEmissao} placeholder="DD/MM/AAAA" />
                       </div>
 
-                      <div className="col-span-3 flex flex-col gap-[8px]">
+                      <div className="col-span-6 flex flex-col gap-[8px]">
                         <label className="text-[12px] font-[600] text-[#374151]">
                           Data de Vencimento <span className="text-[#EF4444] ml-0.5">*</span>
                         </label>
                         <CustomDatePicker value={dataVencimento} onChange={setDataVencimento} placeholder="DD/MM/AAAA" />
-                      </div>
-
-                      <div className="col-span-3 flex flex-col gap-[8px]">
-                        <label className="text-[12px] font-[600] text-[#374151]">
-                          Data Prev. de Recebimento
-                        </label>
-                        <CustomDatePicker value={dataPrevista} onChange={setDataPrevista} placeholder="DD/MM/AAAA" />
-                      </div>
-
-                      <div className="col-span-3 flex flex-col gap-[8px]">
-                        <label className="text-[12px] font-[600] text-[#374151]">
-                          Data Efet. de Recebimento <span className="text-[#EF4444] ml-0.5">*</span>
-                        </label>
-                        <CustomDatePicker value={dataEfetiva} onChange={setDataEfetiva} placeholder="DD/MM/AAAA" />
                       </div>
 
                       <div className="col-span-6 flex flex-col gap-[8px]">
